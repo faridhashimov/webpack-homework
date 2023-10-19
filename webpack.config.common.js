@@ -6,9 +6,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     resolve: {
-        extensions: ['.js'],
+        extensions: ['.ts', '.js'],
     },
-    entry: './index.js',
+    entry: './index.ts',
     devtool: 'source-map',
     output: {
         filename: '[name].[contenthash].js',
@@ -46,6 +46,11 @@ module.exports = {
                 test: /\.(png|svg|jpg|mp3|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
         ],
     },
     plugins: [
@@ -57,7 +62,7 @@ module.exports = {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'public/favicon.ico'),
-                    to: path.resolve(__dirname, 'dist')
+                    to: path.resolve(__dirname, 'dist'),
                 },
             ],
         }),
